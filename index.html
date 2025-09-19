@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NovaTech 企业官网</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                DEFAULT: '#0F172A',
+                light: '#1E293B',
+              },
+              accent: '#6366F1',
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+          sans-serif;
+        background: #ffffff;
+        color: #0b1120;
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      const navigation = [
+        { name: '产品', href: '#products' },
+        { name: '服务', href: '#services' },
+        { name: '案例', href: '#case-studies' },
+        { name: '联系我们', href: '#contact' },
+      ];
+
+      const productHighlights = [
+        {
+          title: 'NovaCloud 平台',
+          description:
+            '以云原生为核心，为企业提供可扩展的微服务架构，快速交付数字化产品。',
+          tags: ['云原生', '可扩展', '自动化部署'],
+          image:
+            'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80',
+        },
+        {
+          title: 'Quantum 数据湖',
+          description:
+            '统一管理企业多源数据，实现实时洞察与智能决策，提升业务敏捷性。',
+          tags: ['实时分析', '数据治理', 'AI 驱动'],
+          image:
+            'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
+        },
+        {
+          title: 'Sentinel 安全套件',
+          description:
+            '多层次智能安全策略，构建企业级零信任安全体系，全面守护资产安全。',
+          tags: ['零信任', '威胁检测', '合规'],
+          image:
+            'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80',
+        },
+      ];
+
+      const services = [
+        {
+          title: '咨询与规划',
+          description: '分析企业现状，制定数字化转型路线，确保战略落地。',
+          icon: (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              className="h-10 w-10"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="M3.75 3.75h16.5v10.5H3.75V3.75Z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="M6 18h12m-9 0v2.25m6-2.25v2.25"
+              />
+            </svg>
+          ),
+        },
+        {
+          title: '定制开发',
+          description: '组建跨职能团队，敏捷迭代交付业务系统与创新应用。',
+          icon: (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              className="h-10 w-10"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="m15 11.25-3 3-3-3m3-6v9"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="M19.5 21h-15a1.5 1.5 0 0 1-1.5-1.5V6A1.5 1.5 0 0 1 4.5 4.5h4.755a1.5 1.5 0 0 1 1.06.44l1.495 1.495a1.5 1.5 0 0 0 1.06.44H19.5A1.5 1.5 0 0 1 21 7.875v11.625A1.5 1.5 0 0 1 19.5 21Z"
+              />
+            </svg>
+          ),
+        },
+        {
+          title: '托管运维',
+          description: '7×24小时全托管运维，保障系统高可用与持续可观测性。',
+          icon: (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              className="h-10 w-10"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="M12 6v6l3 3"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="M21 12A9 9 0 1 1 12 3"
+              />
+            </svg>
+          ),
+        },
+      ];
+
+      const metrics = [
+        { value: '200+', label: '全球企业客户' },
+        { value: '120%', label: '平均ROI提升' },
+        { value: '99.99%', label: '服务可用性' },
+        { value: '24/7', label: '全天候支持' },
+      ];
+
+      const Button = ({ children, variant = 'primary', href = '#' }) => {
+        const baseClasses =
+          'inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
+        const variants = {
+          primary:
+            'bg-black text-white hover:bg-gray-900 focus-visible:ring-black focus-visible:ring-offset-white',
+          secondary:
+            'bg-white text-black border border-black/10 hover:border-black/40 focus-visible:ring-black focus-visible:ring-offset-white',
+        };
+
+        return (
+          <a href={href} className={`${baseClasses} ${variants[variant]}`}>
+            {children}
+          </a>
+        );
+      };
+
+      const Navbar = () => {
+        const [isOpen, setIsOpen] = React.useState(false);
+
+        return (
+          <header className="sticky top-0 z-50 border-b border-black/5 bg-white/80 backdrop-blur">
+            <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+              <div className="flex items-center space-x-2">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black text-white">
+                  <span className="text-lg font-bold">N</span>
+                </div>
+                <div>
+                  <p className="text-lg font-semibold">NovaTech</p>
+                  <p className="text-xs text-black/60">智启未来的企业科技伙伴</p>
+                </div>
+              </div>
+
+              <nav className="hidden items-center space-x-8 text-sm font-medium text-black/80 md:flex">
+                {navigation.map((item) => (
+                  <a key={item.name} href={item.href} className="hover:text-black">
+                    {item.name}
+                  </a>
+                ))}
+              </nav>
+
+              <div className="hidden space-x-3 md:flex">
+                <Button variant="secondary" href="#contact">
+                  登录平台
+                </Button>
+                <Button href="#contact">预约演示</Button>
+              </div>
+
+              <button
+                className="md:hidden"
+                onClick={() => setIsOpen((prev) => !prev)}
+                aria-label="Toggle menu"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="h-7 w-7"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d={
+                      isOpen
+                        ? 'M6 18L18 6M6 6l12 12'
+                        : 'M3.75 5.25h16.5M3.75 12h16.5m-16.5 6.75h16.5'
+                    }
+                  />
+                </svg>
+              </button>
+            </div>
+
+            {isOpen && (
+              <div className="space-y-2 border-t border-black/5 bg-white px-6 py-4 md:hidden">
+                {navigation.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="block rounded-lg px-3 py-2 text-sm font-medium hover:bg-black/5"
+                  >
+                    {item.name}
+                  </a>
+                ))}
+                <div className="flex flex-col space-y-2 pt-2">
+                  <Button variant="secondary" href="#contact">
+                    登录平台
+                  </Button>
+                  <Button href="#contact">预约演示</Button>
+                </div>
+              </div>
+            )}
+          </header>
+        );
+      };
+
+      const Hero = () => (
+        <section className="relative overflow-hidden">
+          <div className="absolute inset-0 -z-10">
+            <div className="pointer-events-none absolute left-1/2 top-20 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-black/5 blur-3xl"></div>
+            <div className="pointer-events-none absolute -left-20 bottom-10 h-72 w-72 rounded-full bg-black/5 blur-3xl"></div>
+          </div>
+
+          <div className="mx-auto flex max-w-6xl flex-col items-center gap-12 px-6 py-24 text-center md:flex-row md:gap-16 md:text-left">
+            <div className="md:w-3/5">
+              <span className="inline-flex items-center rounded-full border border-black/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-black/60">
+                科技驱动增长
+              </span>
+              <h1 className="mt-6 text-4xl font-bold leading-tight text-black sm:text-5xl lg:text-6xl">
+                构建面向未来的企业科技基础设施
+              </h1>
+              <p className="mt-6 text-base leading-relaxed text-black/70 sm:text-lg">
+                NovaTech 通过云原生、数据智能与零信任安全，帮助企业快速实现数字化转型，打造持续创新的业务引擎。
+              </p>
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                <Button href="#contact">获取个性化方案</Button>
+                <Button variant="secondary" href="#case-studies">
+                  查看成功案例
+                </Button>
+              </div>
+              <div className="mt-12 grid grid-cols-2 gap-6 rounded-2xl border border-black/10 bg-white/60 p-6 backdrop-blur-sm sm:grid-cols-4">
+                {metrics.map((metric) => (
+                  <div key={metric.label}>
+                    <p className="text-2xl font-semibold text-black">{metric.value}</p>
+                    <p className="mt-1 text-xs uppercase tracking-wider text-black/60">
+                      {metric.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative w-full md:w-2/5">
+              <div className="relative overflow-hidden rounded-3xl border border-black/5 bg-gradient-to-br from-white to-black/5 p-6 shadow-xl">
+                <div className="space-y-6">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-black/50">
+                      Nova 宙域控制台
+                    </p>
+                    <h2 className="mt-2 text-2xl font-semibold text-black">
+                      实时掌控企业数字资产
+                    </h2>
+                    <p className="mt-3 text-sm text-black/70">
+                      AI 驱动的可视化界面，为跨团队协作提供统一的数据、流程和安全策略视图。
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4 text-left">
+                    {[
+                      '自动化发布流水线',
+                      '智能告警与可观测',
+                      'AI 助理策略建议',
+                      '统一权限与合规',
+                    ].map((item) => (
+                      <div
+                        key={item}
+                        className="rounded-2xl border border-black/10 bg-white/80 p-4 text-sm"
+                      >
+                        <span className="text-black">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="rounded-2xl border border-dashed border-black/20 p-4 text-left text-sm text-black/60">
+                    <p>
+                      “借助 NovaTech，我们的产品迭代周期缩短 40%，安全事故率下降 75%。”
+                    </p>
+                    <p className="mt-3 font-medium text-black">—— Apex Fintech CTO</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+
+      const Products = () => (
+        <section id="products" className="bg-white py-20">
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-widest text-black/50">
+                  产品矩阵
+                </p>
+                <h2 className="mt-3 text-3xl font-bold text-black sm:text-4xl">
+                  连接数据、应用与安全的数字底座
+                </h2>
+              </div>
+              <Button variant="secondary" href="#contact">
+                申请产品白皮书
+              </Button>
+            </div>
+
+            <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {productHighlights.map((product) => (
+                <article
+                  key={product.title}
+                  className="flex h-full flex-col overflow-hidden rounded-3xl border border-black/10 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+                >
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img
+                      src={product.image}
+                      alt={product.title}
+                      className="h-full w-full object-cover transition duration-500 hover:scale-105"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col gap-4 p-6">
+                    <h3 className="text-xl font-semibold text-black">{product.title}</h3>
+                    <p className="text-sm leading-relaxed text-black/70">
+                      {product.description}
+                    </p>
+                    <div className="mt-auto flex flex-wrap gap-2">
+                      {product.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="inline-flex items-center rounded-full border border-black/10 px-3 py-1 text-xs text-black/70"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+
+      const Services = () => (
+        <section id="services" className="bg-black text-white">
+          <div className="mx-auto max-w-6xl px-6 py-20">
+            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-widest text-white/60">
+                  专业服务
+                </p>
+                <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
+                  从战略到交付，陪伴企业每一步
+                </h2>
+              </div>
+              <p className="max-w-xl text-sm leading-relaxed text-white/70">
+                NovaTech 的专家团队覆盖咨询、架构、开发到运维全链路，确保企业技术资产的持续演进与业务价值最大化。
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-6 md:grid-cols-3">
+              {services.map((service) => (
+                <div
+                  key={service.title}
+                  className="flex h-full flex-col rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-white/30"
+                >
+                  <div className="mb-4 text-white/90">{service.icon}</div>
+                  <h3 className="text-xl font-semibold">{service.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-white/70">
+                    {service.description}
+                  </p>
+                  <a
+                    href="#contact"
+                    className="mt-auto inline-flex items-center text-sm font-medium text-white/80 hover:text-white"
+                  >
+                    了解更多
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="ml-2 h-4 w-4"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25 21 12l-3.75 3.75" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M3 12h18"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+
+      const CaseStudies = () => (
+        <section id="case-studies" className="bg-white py-20">
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="rounded-3xl border border-black/10 bg-gradient-to-br from-white to-black/5 p-10 shadow-lg">
+              <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+                <div className="max-w-2xl">
+                  <p className="text-sm font-semibold uppercase tracking-widest text-black/50">
+                    客户案例
+                  </p>
+                  <h2 className="mt-3 text-3xl font-bold text-black sm:text-4xl">
+                    助力全球企业打造可信赖的数字体验
+                  </h2>
+                  <p className="mt-4 text-sm leading-relaxed text-black/70">
+                    在金融、制造、零售与能源等行业，我们帮助企业构建稳定、安全且具前瞻性的技术基座，实现业务规模化增长。
+                  </p>
+                </div>
+                <div className="grid gap-4 text-sm text-black/70">
+                  {[
+                    'Apex Fintech：实现日处理 5 亿+ 交易的低延迟架构',
+                    'Helios Manufacturing：打通供应链数据的实时监控平台',
+                    'Vela Retail：AI 驱动的个性化营销自动化系统',
+                  ].map((item) => (
+                    <div key={item} className="flex items-start gap-3">
+                      <span className="mt-1 inline-flex h-2 w-2 rounded-full bg-black"></span>
+                      <p>{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+
+      const CTASection = () => (
+        <section id="contact" className="bg-black text-white">
+          <div className="mx-auto max-w-6xl px-6 py-20">
+            <div className="grid gap-10 md:grid-cols-2 md:items-center">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-widest text-white/60">
+                  下一步
+                </p>
+                <h2 className="mt-4 text-3xl font-bold sm:text-4xl">
+                  预约一场专属的策略研讨会
+                </h2>
+                <p className="mt-4 text-sm leading-relaxed text-white/70">
+                  告诉我们您的业务目标，我们的专家团队将在 24 小时内与您联系，共同制定高影响力的数字化行动计划。
+                </p>
+              </div>
+              <div className="rounded-3xl border border-white/10 bg-white/10 p-8">
+                <form className="grid gap-4">
+                  <div className="grid gap-2">
+                    <label className="text-xs font-medium uppercase tracking-widest text-white/60">
+                      姓名
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="请输入您的姓名"
+                      className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-white/60 focus:outline-none"
+                    />
+                  </div>
+                  <div className="grid gap-2">
+                    <label className="text-xs font-medium uppercase tracking-widest text-white/60">
+                      企业邮箱
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="you@company.com"
+                      className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-white/60 focus:outline-none"
+                    />
+                  </div>
+                  <div className="grid gap-2">
+                    <label className="text-xs font-medium uppercase tracking-widest text-white/60">
+                      合作需求
+                    </label>
+                    <textarea
+                      rows="4"
+                      placeholder="请描述您当前的挑战或目标"
+                      className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-white/60 focus:outline-none"
+                    ></textarea>
+                  </div>
+                  <Button>提交需求</Button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+
+      const Footer = () => (
+        <footer className="border-t border-black/5 bg-white">
+          <div className="mx-auto grid max-w-6xl gap-8 px-6 py-12 md:grid-cols-4">
+            <div className="md:col-span-2">
+              <div className="flex items-center space-x-2">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black text-white">
+                  <span className="text-lg font-bold">N</span>
+                </div>
+                <span className="text-lg font-semibold">NovaTech</span>
+              </div>
+              <p className="mt-4 text-sm text-black/60">
+                NovaTech 专注于为企业提供云原生、数据智能与安全领域的端到端解决方案，赋能组织实现数字化增长。
+              </p>
+            </div>
+
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-black/50">
+                公司
+              </p>
+              <ul className="mt-4 space-y-2 text-sm text-black/70">
+                <li><a href="#" className="hover:text-black">关于我们</a></li>
+                <li><a href="#" className="hover:text-black">加入我们</a></li>
+                <li><a href="#" className="hover:text-black">媒体中心</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-black/50">
+                资源
+              </p>
+              <ul className="mt-4 space-y-2 text-sm text-black/70">
+                <li><a href="#" className="hover:text-black">开发者中心</a></li>
+                <li><a href="#" className="hover:text-black">合作伙伴</a></li>
+                <li><a href="#" className="hover:text-black">隐私与合规</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-black/5 bg-white/70">
+            <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-6 text-xs text-black/60 sm:flex-row">
+              <p>© {new Date().getFullYear()} NovaTech Inc. 保留所有权利。</p>
+              <div className="flex items-center gap-4">
+                <a href="#" className="hover:text-black">服务条款</a>
+                <a href="#" className="hover:text-black">隐私政策</a>
+                <a href="#" className="hover:text-black">Cookie</a>
+              </div>
+            </div>
+          </div>
+        </footer>
+      );
+
+      const App = () => (
+        <div className="bg-white text-black">
+          <Navbar />
+          <main>
+            <Hero />
+            <Products />
+            <Services />
+            <CaseStudies />
+            <CTASection />
+          </main>
+          <Footer />
+        </div>
+      );
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
